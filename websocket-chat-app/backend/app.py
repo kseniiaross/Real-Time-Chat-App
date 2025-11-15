@@ -66,5 +66,4 @@ if __name__ == "__main__":                            # Run this block only if s
         app,                                          # Flask app instance
         host="0.0.0.0",                               # Listen on all network interfaces
         port=5000,                                    # Port for backend server
-        debug=True                                    # Enable debug mode (auto-reload, extra logs)
     )
