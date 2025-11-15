@@ -65,5 +65,7 @@ if __name__ == "__main__":                            # Run this block only if s
     socketio.run(                                     # Start Socket.IO development server
         app,                                          # Flask app instance
         host="0.0.0.0",                               # Listen on all network interfaces
-        port=5000,                                    # Port for backend server
+        port=5000, 
+        debug=False,
+        allow_unsafe_werkzeug=True                                   # Port for backend server
     )
