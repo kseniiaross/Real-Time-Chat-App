@@ -1,44 +1,53 @@
-# WebSocket Chat Application
+# Real-Time Chat Application
 
 ## Overview
-This is a real-time chat application built using Flask-SocketIO for the backend and React with TypeScript for the frontend. The project supports real-time communication via WebSockets, allowing users to send and receive messages in a chatroom in real-time. 
+A modern **real-time chat platform** built with **Flask-SocketIO** (backend) and **React + TypeScript** (frontend).  
+Supports instant messaging, custom rooms, reactions, and a polished animated UI.
 
 ## Features
-- **Real-Time Messaging**: Allows users to send and receive messages instantly using WebSocket technology.
-- **Structured Pages**: Includes components such as the chat room and input forms for sending messages.
-- **Responsive Design**: The application adapts to different screen sizes, from desktops to mobile devices.
-- **User Timestamps**: Displays usernames and timestamps for each message sent in the chatroom.
-- **Frontend-Backend Integration**: Real-time communication between Flask-SocketIO backend and React frontend.
-- **Local and Cloud Hosting**: The backend can be run locally, while the frontend is deployed on Vercel.
+
+- **Welcome Screen**: Enter your name, choose or create a room, and instantly join the chat.
+
+
+![Welcome](gifs/welcome.gif)
+
+
+- **Real-Time Messaging**: Messages appear instantly for all users in the room through WebSockets.
+
+![Messaging](gifs/messaging.gif)
+
+
+- **Multi-Room System**: Create unlimited rooms, switch between them, rename, or delete rooms locally.
+
+![Rooms](gifs/rooms.gif)
+
+
+- **Invite Friends**: Generate a personal invite link — users join your room automatically.
+
+![Invite](gifs/invite.gif)
+
+
+- **Message Reactions**: Like any message — likes update instantly for all connected users.
+
+![Likes](gifs/likes.gif)
+
+
+- **Local Persistence**: Messages and likes remain saved even after refreshing the page (per user and per room).
+
+![Persistence](gifs/persistence.gif)
+
 
 ## Technologies Used
-- **Frontend**: React, TypeScript, Vite
-- **Backend**: Flask, Flask-SocketIO
-- **WebSocket**: Flask-SocketIO, socket.io-client
-- **Deployment**: Vercel (Frontend), Localhost for Backend
 
+- **React + TypeScript**
+- **Vite**
+- **Socket.IO Client**
+- **Flask + Flask-SocketIO**
+- **Python 3**
+- **LocalStorage**
+- **Custom CSS (Glow Theme)**
+- **Clipboard API**
 
-https://chat-application-project-3wiq0q7oz-rostovks94s-projects.vercel.app
-
-
-### Project Structure
-
-```bash
-/websocket-chat-app
-├── backend
-│   ├── app.py              
-│   └── requirements.txt     
-├── frontend/app
-│   ├── src
-│   │   ├── components
-│   │   │   ├── ChatBody.tsx     
-│   │   │   └── MessageInput.tsx 
-│   │   ├── App.tsx              
-│   │   └── main.tsx             
-│   ├── public
-│   │   └── index.html          
-│   └── package.json            
-└── README.md
-```
 
 Feel free to reach out if you have any questions or suggestions.
+
