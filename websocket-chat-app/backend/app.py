@@ -2,7 +2,7 @@ from flask import Flask                               # Import Flask core class 
 from flask_socketio import SocketIO, join_room, leave_room  # Import SocketIO and helpers to work with rooms
 
 app = Flask(__name__)                                 # Create Flask application instance
-socketio = SocketIO(app, cors_allowed_origins="*")    # Attach SocketIO to the app, allow CORS from any origin
+socketio = SocketIO(app, cors_allowed_origins="*", async_mode="threading")    # Attach SocketIO to the app, allow CORS from any origin
 
 
 # user joins room
