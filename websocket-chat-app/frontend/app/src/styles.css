@@ -1,0 +1,770 @@
+/* ===== GLOBAL LAYOUT ===== */
+
+html,
+body { /* Global page baseline styles */
+  height: 100%; /* Make page take full viewport height */
+  margin: 0; /* Remove default browser margin */
+  padding: 0; /* Remove default browser padding */
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", Arial,
+    sans-serif; /* Use system font stack with SF Pro Text fallback */
+  background: radial-gradient(circle at top, #2b2a25 0, #120b00 55%, #0a0500 100%); /* Dark radial gradient background */
+}
+
+/* Center the React app container on the screen */
+#root {
+  min-height: 100vh; /* Root should at least match viewport height */
+  display: flex; /* Use flexbox for centering */
+  align-items: center; /* Vertically center content */
+  justify-content: center; /* Horizontally center content */
+  padding: 24px; /* Add padding around chat shell */
+}
+
+.header-left {
+  display: flex; /* Layout header-left items in a column */
+  flex-direction: column; /* Stack elements vertically */
+  align-items: flex-start; /* Align items to the left */
+  gap: 4px; /* Small vertical gap between header-left rows */
+}
+
+/* Top row in header: title + LIVE indicator */
+.header-top {
+  display: flex; /* Place title and LIVE row horizontally */
+  align-items: center; /* Vertically center them */
+  gap: 10px; /* Space between title and LIVE indicator */
+}
+
+/* Right header block: Invite + Logout buttons */
+.header-right {
+  display: flex; /* Place buttons side by side */
+  align-items: center; /* Align buttons vertically center */
+  gap: 12px; /* Space between Invite and Logout buttons */
+}
+
+/* Styles for header buttons (Invite / Logout) */
+.header-btn {
+  padding: 0.55rem 1.3rem; /* Horizontal and vertical padding */
+  border-radius: 999px; /* Fully rounded pill shape */
+  border: 1px solid rgba(251, 146, 60, 0.55); /* Soft orange border */
+  background: linear-gradient(90deg, #fb923c, #fbbf24); /* Orange to yellow gradient */
+  color: #fff8e7; /* Warm off-white text color */
+  box-shadow:
+    0 0 16px rgba(251, 146, 60, 0.7),
+    0 0 30px rgba(251, 146, 60, 0.55); /* Glowing orange shadow */
+}
+
+/* Special styling for Logout button (slightly redder) */
+.header-btn-logout {
+  border-color: rgba(248, 113, 113, 0.9); /* Red-tinted border */
+  background: linear-gradient(90deg, #f97373, #fb923c); /* Red to orange gradient */
+}
+
+/* ===== WELCOME SCREEN ===== */
+
+.welcome-wrapper {
+  min-height: 100vh; /* Full viewport height for welcome state */
+  display: flex; /* Center welcome card using flexbox */
+  align-items: center; /* Vertically center card */
+  justify-content: center; /* Horizontally center card */
+  background: radial-gradient(circle at top, #2b2a25 0, #120b00 55%, #0a0500 100%); /* Same dark gradient as global */
+}
+
+.welcome-card {
+  padding: 40px 50px; /* Inner spacing of card */
+  background: rgba(20, 12, 0, 0.9); /* Dark semi-transparent panel */
+  border-radius: 22px; /* Rounded corners for card */
+  border: 1px solid rgba(251, 146, 60, 0.45); /* Soft orange border around card */
+  text-align: center; /* Center text inside card */
+  box-shadow:
+    0 0 40px rgba(255, 115, 0, 0.35),
+    0 0 70px rgba(255, 115, 0, 0.2); /* Outer orange glow for card */
+}
+
+.welcome-title {
+  font-size: 2rem; /* Larger title size */
+  color: #fff8e7; /* Warm white title color */
+  text-transform: uppercase; /* Uppercase heading text */
+  letter-spacing: 0.1em; /* Wide tracking for title */
+  margin: 0 0 10px; /* Remove top margin, small bottom margin */
+}
+
+.welcome-subtitle {
+  font-size: 1rem; /* Regular subtitle size */
+  color: #fcdba5; /* Soft light-orange subtitle text */
+  margin-bottom: 24px; /* Space below subtitle before inputs */
+}
+
+.welcome-input {
+  width: 100%; /* Inputs stretch full card width */
+  padding: 12px 16px; /* Internal padding for input */
+  margin-bottom: 20px; /* Space between inputs / button */
+  border-radius: 10px; /* Soft rounded corners for input */
+  border: 1px solid rgba(251, 146, 60, 0.5); /* Orange border */
+  background: rgba(30, 20, 5, 0.9); /* Dark brownish background */
+  color: #fff8e7; /* Input text color */
+  font-size: 1rem; /* Readable font size */
+  outline: none; /* Remove default focus outline */
+  transition: 0.2s ease; /* Smooth transitions for focus state */
+}
+
+.welcome-input:focus {
+  border-color: #fb923c; /* Stronger orange border on focus */
+  box-shadow: 0 0 8px rgba(251, 146, 60, 0.6); /* Subtle glow when focused */
+}
+
+.welcome-btn {
+  width: 100%; /* Button fills card width */
+  padding: 12px 18px; /* Internal spacing for button */
+  border-radius: 12px; /* Rounded button shape */
+  background: linear-gradient(90deg, #fb923c, #fbbf24); /* Orange to yellow gradient */
+  border: none; /* Remove default border */
+  color: #fff8e7; /* Button text color */
+  font-size: 1rem; /* Text size in button */
+  text-transform: uppercase; /* Uppercase button label */
+  cursor: pointer; /* Pointer cursor on hover */
+  box-shadow:
+    0 0 15px rgba(251, 146, 60, 0.75),
+    0 0 30px rgba(251, 146, 60, 0.55); /* Strong glow on button */
+  transition: 0.2s ease; /* Smooth hover/active transitions */
+}
+
+.welcome-btn:hover {
+  transform: translateY(-1px); /* Slight lift on hover */
+  filter: brightness(1.05); /* Make button a bit brighter */
+}
+
+.welcome-btn:active {
+  transform: translateY(0); /* Reset lift on click */
+}
+
+/* ===== CHAT SHELL ===== */
+.chat-shell {
+  width: 100%; /* Shell should adapt to available width */
+  max-width: 960px; /* Limit max width for readability */
+  min-height: 640px; /* Ensure enough height for chat area */
+  background: rgba(20, 12, 0, 0.96); /* Dark panel background */
+  border-radius: 24px; /* Rounded outer shell corners */
+  border: 1px solid rgba(251, 146, 60, 0.45); /* Orange border around shell */
+  box-shadow:
+    0 0 40px rgba(255, 115, 0, 0.4),
+    0 0 80px rgba(255, 115, 0, 0.25); /* Large glowing shadow for shell */
+  display: flex; /* Use flexbox for header / messages / footer layout */
+  flex-direction: column; /* Stack sections vertically */
+  overflow: hidden; /* Clip inner content to rounded corners */
+}
+
+/* ===== HEADER ===== */
+
+.chat-header {
+  padding: 18px 24px 14px; /* Internal spacing in header */
+  border-bottom: 1px solid rgba(251, 146, 60, 0.35); /* Divider line below header */
+  display: flex; /* Horizontal layout for left and right blocks */
+  justify-content: space-between; /* Space between left block and right buttons */
+  align-items: center; /* Vertically center header content */
+}
+
+.chat-title {
+  font-size: 1.35rem; /* Title font size */
+  letter-spacing: 0.08em; /* Slightly increased letter spacing */
+  text-transform: uppercase; /* Uppercase username / title */
+  color: #fff8e7; /* Light title color */
+}
+
+.chat-subtitle {
+  display: flex; /* Layout for LIVE dot + label + bars */
+  align-items: center; /* Vertically center items */
+  gap: 8px; /* Space between dot, text, and equalizer */
+  font-size: 0.8rem; /* Smaller subtitle font size */
+  text-transform: uppercase; /* Uppercase LIVE label */
+  letter-spacing: 0.08em; /* Tracking for LIVE text */
+  color: #fed7aa; /* Soft light-orange text */
+}
+
+/* Small pulsing LIVE dot */
+.live-dot {
+  width: 8px; /* Dot width */
+  height: 8px; /* Dot height */
+  border-radius: 999px; /* Make dot perfectly round */
+  background: radial-gradient(circle at 30% 30%, #f97316, #b45309); /* Gradient inside dot */
+  box-shadow: 0 0 8px rgba(249, 115, 22, 0.9); /* Glow around dot */
+  animation: livePulse 1.4s ease-in-out infinite; /* Infinite pulsing animation */
+}
+
+.live-label {
+  font-weight: 600; /* Slightly bold LIVE text */
+}
+
+/* Three animated bars acting as an audio equalizer */
+.live-equalizer {
+  display: inline-flex; /* Inline flex so it sits next to text */
+  align-items: flex-end; /* Align bars to bottom */
+  gap: 3px; /* Small gap between bars */
+  margin-left: 4px; /* Offset from LIVE label */
+}
+
+.live-equalizer span {
+  width: 3px; /* Bar width */
+  height: 8px; /* Base bar height */
+  border-radius: 999px; /* Rounded bar corners */
+  background: linear-gradient(to top, #f97316, #fde68a); /* Gradient from orange to yellow */
+  animation: liveBars 0.8s ease-in-out infinite; /* Repeating height animation */
+}
+
+/* Delay for second bar to desync animation */
+.live-equalizer span:nth-child(2) {
+  animation-delay: 0.15s; /* Small delay for second bar */
+}
+
+/* Additional delay for third bar */
+.live-equalizer span:nth-child(3) {
+  animation-delay: 0.3s; /* Larger delay for third bar */
+}
+
+.chat-room-label {
+  font-size: 0.95rem; /* Room name font size */
+  font-weight: 600; /* Make room name slightly bold */
+  color: #fbbf24; /* Bright yellow-orange text */
+  background: rgba(251, 146, 60, 0.15); /* Soft background highlight */
+  padding: 4px 10px; /* Inner padding for pill */
+  border-radius: 8px; /* Rounded rectangle shape */
+  border: 1px solid rgba(251, 146, 60, 0.35); /* Light orange border */
+  letter-spacing: 0.05em; /* Slight letter spacing */
+  display: inline-flex; /* Inline flex for better alignment */
+  align-items: center; /* Vertically center text in pill */
+  justify-content: center; /* Horizontally center text in pill */
+}
+
+/* Circular Send button in footer */
+.send-btn {
+  width: 42px; /* Fixed width for circle */
+  height: 42px; /* Fixed height for circle */
+  border-radius: 999px; /* Make it perfectly round */
+  display: flex; /* Center text inside button */
+  align-items: center; /* Vertical centering */
+  justify-content: center; /* Horizontal centering */
+  font-size: 0.75rem; /* Small send label size */
+  letter-spacing: 0.06em; /* Slight spacing for uppercase text */
+  text-transform: uppercase; /* Uppercase button label */
+  background: radial-gradient(circle at 0 0, #fb923c, #fbbf24); /* Radial orange-yellow gradient */
+  color: #fff8e7; /* Button text color */
+  border: 1px solid rgba(251, 146, 60, 0.7); /* Strong border to match glow */
+  box-shadow:
+    0 0 14px rgba(251, 146, 60, 0.8),
+    0 0 26px rgba(251, 146, 60, 0.6); /* Glow around send button */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease; /* Smooth hover transitions */
+}
+
+.send-btn:hover {
+  transform: translateY(-1px); /* Slight lift on hover */
+  filter: brightness(1.05); /* Brighten button on hover */
+  box-shadow:
+    0 0 20px rgba(251, 146, 60, 1),
+    0 0 34px rgba(251, 146, 60, 0.95); /* Stronger glow on hover */
+}
+
+.send-btn:active {
+  transform: translateY(0); /* Reset lift when pressed */
+  filter: brightness(0.97); /* Slightly darken on press */
+}
+
+/* Pulsing animation for LIVE dot */
+@keyframes livePulse {
+  0% {
+    transform: scale(1); /* Normal scale at start */
+    opacity: 0.85; /* Slightly transparent at start */
+  }
+  50% {
+    transform: scale(1.2); /* Grow dot in middle */
+    opacity: 1; /* Fully opaque in middle */
+  }
+  100% {
+    transform: scale(1); /* Return to original size */
+    opacity: 0.85; /* Return to starting opacity */
+  }
+}
+
+/* Height animation for LIVE bars */
+@keyframes liveBars {
+  0% {
+    height: 4px; /* Short bar at start */
+  }
+  50% {
+    height: 10px; /* Taller bar in middle */
+  }
+  100% {
+    height: 4px; /* Return to short bar */
+  }
+}
+
+/* ===== MESSAGES PANEL ===== */
+
+.messages-panel {
+  flex: 1; /* Take remaining vertical space between header and footer */
+  padding: 18px 20px 12px; /* Inner spacing around messages */
+  display: flex; /* Use flexbox inside panel */
+  flex-direction: column; /* Stack list vertically */
+  gap: 10px; /* Space between elements (if any) inside panel */
+}
+
+.messages-list {
+  list-style: none; /* Remove default bullets from list */
+  padding: 0; /* Remove default list padding */
+  margin: 0; /* Remove default list margin */
+  display: flex; /* Use flexbox for messages */
+  flex-direction: column; /* Stack messages vertically */
+  gap: 12px; /* Space between messages */
+  overflow-y: auto; /* Allow vertical scroll when messages overflow */
+  max-height: 100%; /* Constrain list height inside panel */
+}
+
+/* One message row (avatar + bubble area) */
+.message-item {
+  display: flex; /* Layout avatar and text next to each other */
+  align-items: flex-end; /* Align bottom edges for nicer rows */
+  width: 100%; /* Message row spans full width */
+}
+
+/* Align my own messages to the right */
+.message-item--self {
+  justify-content: flex-end; /* Push my content to the right edge */
+}
+
+/* Place avatar to the right for own messages */
+.message-item--self .message-avatar {
+  order: 2; /* Move avatar after main content */
+  margin-left: 8px; /* Add spacing between bubble and avatar */
+}
+
+/* Avatar circle for initial letter */
+.message-avatar {
+  width: 32px; /* Avatar width */
+  height: 32px; /* Avatar height */
+  border-radius: 999px; /* Make avatar round */
+  background: radial-gradient(circle at 0 0, #fb923c, #451a03); /* Gradient for avatar */
+  display: flex; /* Center initial inside avatar */
+  align-items: center; /* Vertical centering */
+  justify-content: center; /* Horizontal centering */
+  font-size: 0.9rem; /* Letter size inside avatar */
+  color: #fff8e7; /* Avatar initial color */
+  flex-shrink: 0; /* Prevent avatar from shrinking */
+}
+
+/* The main message container (meta row + bubble) */
+.message-main {
+  display: flex; /* Use flexbox inside main block */
+  flex-direction: column; /* Stack meta row above bubble */
+  max-width: 70%; /* Limit width for better readability */
+}
+
+/* Right-align all content for own messages */
+.message-main--self {
+  align-items: flex-end; /* Push inner content to the right */
+}
+
+/* Top row of message: username, time, like button */
+.message-meta-row {
+  display: flex; /* Layout name + time + like horizontally */
+  align-items: center; /* Vertical centering of meta items */
+  gap: 8px; /* Gap between elements in meta row */
+  margin-bottom: 4px; /* Space below meta row before bubble */
+}
+
+/* Move meta row slightly over bubble for my messages */
+.message-main--self .message-meta-row {
+  margin-right: -35px; /* Shift meta row to overlap bubble a bit */
+}
+
+/* For other users, align meta row to left edge */
+.message-main:not(.message-main--self) .message-meta-row {
+  align-self: flex-start; /* Align meta row to left for incoming messages */
+}
+
+.message-author {
+  font-size: 0.9rem; /* Username size */
+  font-weight: 600; /* Slightly bold username */
+  color: #fff8e7; /* Light color for author name */
+}
+
+.meta-right {
+  display: flex; /* Layout time and like button horizontally */
+  align-items: center; /* Align them vertically */
+  gap: 10px; /* Space between time and like group */
+}
+
+.message-time {
+  font-size: 0.75rem; /* Small time label */
+  color: #fcdba5; /* Soft light-orange time color */
+}
+
+/* Message bubble containing only the text */
+.message-bubble {
+  padding: 8px 12px 7px; /* Inner padding of bubble */
+  border-radius: 16px; /* Rounded bubble corners */
+  background: rgba(30, 20, 5, 0.9); /* Dark background for other messages */
+  border: 1px solid rgba(251, 146, 60, 0.35); /* Subtle border around bubble */
+}
+
+.message-bubble--self {
+  background: rgba(251, 146, 60, 0.16); /* Slightly highlighted background for my messages */
+  border-color: rgba(251, 146, 60, 0.7); /* Stronger border for my messages */
+}
+
+.message-text {
+  font-size: 0.95rem; /* Main message text size */
+  color: #fff3d6; /* Light warm text color */
+}
+
+/* ===== LIKE BUTTON ===== */
+
+.like-group {
+  display: flex; /* Layout like icon and count horizontally */
+  align-items: center; /* Vertically center them */
+  gap: 4px; /* Space between icon and count */
+  justify-content: flex-end; /* Align like group to the right */
+}
+
+.like-btn {
+  border: none; /* Remove default button border */
+  padding: 3px 6px; /* Small internal padding around icon and count */
+  background: transparent; /* Transparent background by default */
+  cursor: pointer; /* Pointer cursor on hover */
+  display: flex; /* Layout icon and count inline */
+  align-items: center; /* Vertical centering */
+  gap: 4px; /* Space between heart and count */
+  border-radius: 999px; /* Round pill shape when hovered */
+  transition: background 0.2s ease, transform 0.15s ease; /* Smooth hover transitions */
+}
+
+.like-icon {
+  font-size: 1rem; /* Heart icon size */
+  line-height: 1; /* Tight line height around heart */
+  color: #fcdba5; /* Default heart color (unliked) */
+  transition: color 0.2s ease; /* Smooth color change on like */
+}
+
+.like-count {
+  font-size: 0.8rem; /* Likes counter size */
+  color: #fcdba5; /* Counter text color */
+}
+
+.like-btn.liked .like-icon {
+  color: #f97316; /* Bright orange heart when liked */
+}
+
+.like-btn:hover {
+  background: rgba(251, 146, 60, 0.12); /* Soft highlight on hover */
+  transform: translateY(-1px); /* Slight lift on hover */
+}
+
+/* ===== INPUT AREA ===== */
+
+.chat-footer {
+  padding: 12px 20px 18px; /* Internal spacing in footer */
+  border-top: 1px solid rgba(251, 146, 60, 0.35); /* Divider line above footer */
+}
+
+.input-container {
+  display: grid; /* Use CSS grid for input and send button */
+  grid-template-columns: minmax(0, 1fr) auto; /* Input grows, button fixed */
+  gap: 10px; /* Gap between input and send button */
+}
+
+.input-container input[type="text"] {
+  width: 100%; /* Text field fills available space */
+  padding: 0.65rem 0.85rem; /* Internal padding for field */
+  border-radius: 999px; /* Fully rounded input field */
+  border: 1px solid rgba(251, 146, 60, 0.6); /* Orange border */
+  background: rgba(30, 20, 5, 0.9); /* Dark background for input */
+  color: #fff8e7; /* Light text color */
+  font-size: 0.95rem; /* Readable text size */
+  outline: none; /* Remove default outline */
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease; /* Smooth focus transitions */
+}
+
+.input-container input[type="text"]::placeholder {
+  color: #d97706; /* Warm orange placeholder text */
+}
+
+.input-container input[type="text"]:focus {
+  border-color: #fb923c; /* Stronger border on focus */
+  box-shadow: 0 0 0 1px rgba(251, 146, 60, 0.7); /* Thin glowing outline on focus */
+}
+
+/* Global button style (for non-send buttons too) */
+button {
+  padding: 0.65rem 1.4rem; /* Default button padding */
+  border-radius: 999px; /* Pills for all buttons */
+  border: none; /* Remove default border */
+  font-size: 0.95rem; /* Button text size */
+  font-weight: 500; /* Slightly bold text */
+  letter-spacing: 0.04em; /* Small letter spacing */
+  text-transform: uppercase; /* Uppercase button labels */
+  cursor: pointer; /* Pointer cursor */
+  background: radial-gradient(circle at 0 0, #fb923c, #fbbf24); /* Radial gradient background */
+  color: #fff8e7; /* Button text color */
+  box-shadow:
+    0 0 16px rgba(251, 146, 60, 0.75),
+    0 0 30px rgba(251, 146, 60, 0.65); /* Glow around most buttons */
+  transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease; /* Smooth hover transitions */
+}
+
+button:hover {
+  transform: translateY(-1px); /* Slight lift on hover */
+  filter: brightness(1.05); /* Slightly brighten button */
+  box-shadow:
+    0 0 22px rgba(251, 146, 60, 0.95),
+    0 0 40px rgba(251, 146, 60, 0.9); /* Stronger glow on hover */
+}
+
+button:active {
+  transform: translateY(0); /* Reset position when pressed */
+  filter: brightness(0.97); /* Slightly darken when pressed */
+}
+
+/* Duplicate input-container rule (kept as safety, matches one above) */
+.input-container {
+  display: grid; /* Grid for text input and send button */
+  grid-template-columns: minmax(0, 1fr) auto; /* Input grows, button fixed */
+  gap: 10px; /* Gap between input and button */
+}
+
+/* ===== ROOMS BAR UNDER USERNAME ===== */
+
+.rooms-bar {
+  margin-top: 6px; /* Small gap above room pills row */
+  display: flex; /* Horizontal list of room pills */
+  flex-wrap: wrap; /* Allow pills to wrap onto multiple lines */
+  gap: 6px; /* Space between room pills */
+}
+
+.room-pill {
+  padding: 4px 10px; /* Horizontal and vertical padding for pill */
+  border-radius: 999px; /* Fully rounded pill shape */
+  border: 1px solid rgba(251, 146, 60, 0.35); /* Soft orange border */
+  background: rgba(30, 20, 5, 0.9); /* Dark pill background */
+  color: #fed7aa; /* Light text color */
+  font-size: 0.75rem; /* Small pill label size */
+  letter-spacing: 0.06em; /* Slight letter spacing */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    transform 0.1s ease; /* Smooth hover transitions */
+}
+
+.room-pill:hover {
+  background: rgba(251, 146, 60, 0.18); /* Slightly highlighted background on hover */
+  border-color: rgba(251, 146, 60, 0.7); /* Stronger border on hover */
+  transform: translateY(-1px); /* Slight lift on hover */
+}
+
+.room-pill--active {
+  background: linear-gradient(90deg, #fb923c, #fbbf24); /* Gradient for active room pill */
+  color: #1a1305; /* Dark text color for contrast */
+  border-color: rgba(251, 146, 60, 0.95); /* Strong border for active state */
+}
+
+/* Special style for "create chat" pill */
+.room-pill--create {
+  border-style: dashed; /* Dashed border to signal special action */
+  opacity: 0.9; /* Slightly faded when idle */
+}
+
+.room-pill--create:hover {
+  opacity: 1; /* Full opacity on hover */
+}
+
+/* ===== MODALS (CREATE ROOM / INVITE FRIENDS) ===== */
+
+.modal-backdrop {
+  position: fixed; /* Overlay on top of entire viewport */
+  inset: 0; /* Stretch to all four edges */
+  background: radial-gradient(circle at top, rgba(0, 0, 0, 0.8), rgba(10, 5, 0, 0.95)); /* Dark overlay with gradient */
+  display: flex; /* Center modal card using flexbox */
+  align-items: center; /* Vertically center modal */
+  justify-content: center; /* Horizontally center modal */
+  z-index: 50; /* Raise modal above chat shell */
+}
+
+.modal-card {
+  min-width: min(480px, 90vw); /* Responsive min width with maximum 480px */
+  padding: 24px 26px 20px; /* Inner spacing of modal */
+  border-radius: 18px; /* Rounded modal corners */
+  background: rgba(17, 10, 0, 0.96); /* Dark modal background */
+  border: 1px solid rgba(251, 146, 60, 0.55); /* Orange border around modal */
+  box-shadow:
+    0 0 40px rgba(255, 115, 0, 0.45),
+    0 0 80px rgba(255, 115, 0, 0.3); /* Glowing shadow for modal */
+  color: #fff8e7; /* Default modal text color */
+}
+
+.modal-title {
+  margin: 0 0 6px; /* No top margin, small bottom margin */
+  font-size: 1.15rem; /* Modal title size */
+  letter-spacing: 0.08em; /* Letter spacing for title */
+  text-transform: uppercase; /* Uppercase modal title */
+}
+
+.modal-subtitle {
+  margin: 0 0 16px; /* Space below subtitle before inputs */
+  font-size: 0.9rem; /* Subtitle text size */
+  color: #fcdba5; /* Soft light-orange subtitle text */
+}
+
+.modal-room-name {
+  font-weight: 600; /* Emphasize room name in text */
+  color: #fbbf24; /* Bright yellow room name */
+}
+
+.modal-input {
+  width: 100%; /* Input fills modal width */
+  padding: 10px 12px; /* Inner input padding */
+  border-radius: 999px; /* Fully rounded input */
+  border: 1px solid rgba(251, 146, 60, 0.6); /* Orange border */
+  background: rgba(30, 20, 5, 0.95); /* Dark input background */
+  color: #fff8e7; /* Input text color */
+  font-size: 0.9rem; /* Input text size */
+  outline: none; /* Remove default outline */
+  margin-bottom: 16px; /* Space under input */
+}
+
+.modal-input::placeholder {
+  color: #d97706; /* Warm orange placeholder text */
+}
+
+.modal-input:focus {
+  border-color: #fb923c; /* Stronger border on focus */
+  box-shadow: 0 0 0 1px rgba(251, 146, 60, 0.7); /* Thin glowing outline on focus */
+}
+
+/* Row for invitation link + copy button */
+.modal-link-box {
+  display: grid; /* Use grid for link + button */
+  grid-template-columns: minmax(0, 1fr) auto; /* Link expands, button fixed */
+  gap: 8px; /* Gap between link field and button */
+  margin-bottom: 14px; /* Space below link row */
+}
+
+.modal-input-link {
+  border-radius: 999px; /* Round link field */
+}
+
+.modal-actions {
+  display: flex; /* Horizontal row for modal buttons */
+  justify-content: flex-end; /* Align buttons to the right */
+  gap: 10px; /* Space between buttons */
+}
+
+.modal-btn {
+  padding: 0.55rem 1.3rem; /* Default modal button padding */
+  border-radius: 999px; /* Pill-shaped modal buttons */
+  border: 1px solid rgba(251, 146, 60, 0.75); /* Orange border for primary buttons */
+  background: radial-gradient(circle at 0 0, #fb923c, #fbbf24); /* Gradient background for primary buttons */
+  color: #fff8e7; /* Button text color */
+  font-size: 0.9rem; /* Button text size */
+  letter-spacing: 0.06em; /* Slight letter spacing */
+  text-transform: uppercase; /* Uppercase labels */
+  cursor: pointer; /* Pointer cursor on hover */
+  box-shadow:
+    0 0 16px rgba(251, 146, 60, 0.75),
+    0 0 30px rgba(251, 146, 60, 0.65); /* Glow around primary buttons */
+  transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease; /* Smooth hover transitions */
+}
+
+.modal-btn:hover {
+  transform: translateY(-1px); /* Slight lift on hover */
+  filter: brightness(1.05); /* Slightly brighten on hover */
+}
+
+.modal-btn:active {
+  transform: translateY(0); /* Reset position on click */
+  filter: brightness(0.97); /* Slight darkening on click */
+}
+
+/* Secondary button style (Cancel / Close) */
+.modal-btn-secondary {
+  border-color: rgba(148, 163, 184, 0.7); /* Gray-blue border */
+  background: rgba(15, 23, 42, 0.9); /* Dark blue-ish background */
+  box-shadow: none; /* No glow for secondary buttons */
+}
+
+.modal-btn-secondary:hover {
+  box-shadow:
+    0 0 16px rgba(148, 163, 184, 0.35),
+    0 0 30px rgba(30, 64, 175, 0.3); /* Cool-toned glow on hover */
+}
+
+.modal-btn-small {
+  padding-inline: 0.9rem; /* Smaller horizontal padding for compact button */
+}
+
+/* Bottom row in invite modal (status + Close button) */
+.modal-footer-row {
+  display: flex; /* Layout status and Close button horizontally */
+  align-items: center; /* Vertically center them */
+  justify-content: space-between; /* Push items to opposite ends */
+  gap: 10px; /* Space between elements if they wrap */
+}
+
+.modal-copy-status {
+  font-size: 0.8rem; /* Small status text */
+  color: #bbf7d0; /* Light green status color (success) */
+}
+
+/* ===== ROOM HEADER ROW (current room + manage button) ===== */
+
+.room-header-row {
+  margin-top: 4px; /* Small gap above room label row */
+  display: flex; /* Layout room label and manage button inline */
+  align-items: center; /* Vertically align them */
+  gap: 8px; /* Space between room label and manage button */
+}
+
+/* Small "manage" chip-style button next to room name */
+.room-manage-btn {
+  padding: 0.18rem 0.7rem; /* Compact vertical and horizontal padding */
+  font-size: 0.7rem; /* Small text size */
+  letter-spacing: 0.08em; /* Slight letter spacing */
+  text-transform: uppercase; /* Uppercase text */
+  border-radius: 999px; /* Pill-shaped button */
+  border: 1px solid rgba(251, 146, 60, 0.55); /* Soft orange border */
+  background: transparent; /* Transparent background */
+  color: #fed7aa; /* Light text color */
+  box-shadow: none; /* No glow by default */
+}
+
+.room-manage-btn:hover {
+  background: rgba(251, 146, 60, 0.18); /* Highlight on hover */
+  box-shadow:
+    0 0 12px rgba(251, 146, 60, 0.6),
+    0 0 20px rgba(251, 146, 60, 0.4); /* Small glow on hover */
+}
+
+/* ===== EXTRA BUTTON STYLE FOR "DELETE ROOM" ===== */
+
+.modal-btn-danger {
+  border-color: rgba(248, 113, 113, 0.9); /* Strong red border */
+  background: linear-gradient(90deg, #f97373, #fb923c); /* Red to orange gradient */
+}
+
+/* ===== MOBILE ===== */
+
+@media (max-width: 640px) { /* Styles for small screens and phones */
+  .chat-shell {
+    border-radius: 18px; /* Slightly smaller rounding on small screens */
+  }
+
+  .chat-header {
+    flex-direction: column; /* Stack header blocks vertically */
+    align-items: flex-start; /* Align header content to left */
+    gap: 4px; /* Small gap between rows */
+  }
+
+  .input-container {
+    grid-template-columns: 1fr; /* Stack input and button vertically */
+  }
+
+  button {
+    width: 100%; /* Make buttons full width on mobile */
+  }
+}
