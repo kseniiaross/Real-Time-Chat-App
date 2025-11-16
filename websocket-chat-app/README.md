@@ -1,105 +1,42 @@
-# WebSocket Chat Application
+# Real-Time Chat Application
 
 ## Overview
-
-This project is a real-time chat application built using WebSocket technology, React on the frontend, and Flask on the backend. It enables users to join chat rooms and exchange messages in real-time.
+A modern **real-time chat platform** built with **Flask-SocketIO** (backend) and **React + TypeScript** (frontend).  
+Supports instant messaging, custom rooms, reactions, and a polished animated UI.
 
 ## Features
 
-- WebSocket connection between the client and server for real-time messaging.
-- A minimalist and responsive UI built with React.
-- Chat messages are stored in `localStorage`.
-- Usernames and timestamps are displayed for each message.
-- The chat interface allows message sending and basic chat room functionality.
+- **Welcome Screen**: Enter your name, choose or create a room, and instantly join the chat.
 
-## Project Structure
+![Welcome](screenshots/welcome-screen.png)
 
-- **`backend/`**: Contains the Flask server that handles WebSocket communication.
-- **`frontend/app/`**: Contains the React frontend that connects to the WebSocket server.
-  
-## Prerequisites
+- **Real-Time Messaging**: Messages appear instantly for all users in the room through WebSockets.
 
-- Node.js (for frontend)
-- Python 3.x (for backend)
-- Git
+![Messaging](screenshots/real-time-messaging.png)
 
-## Setup Instructions
+- **Multi-Room System**: Create unlimited rooms, switch between them, rename, or delete rooms locally.
 
-### 1. Clone the Repository
+![Rooms](screenshots/multi-room-system.png)
 
-```bash
-git clone https://github.com/your-repo/websocket-chat-app.git
-cd websocket-chat-app
+- **Invite Friends**: Generate a personal invite link — users join your room automatically.
 
-### 2. Backend Setup (Flask)
+![Invite](screenshots/invite-friends.png)
 
-	1.	Navigate to the backend/ folder:
-      cd backend
+- **Message Reactions**: Like any message — likes update instantly for all connected users.
 
-  2.	Create and activate a virtual environment:
-      python3 -m venv venv
-      source venv/bin/activate
+![Likes](screenshots/message-reactions.png)
 
-  3.	Install the required Python packages:
-      pip install -r requirements.txt
+## Technologies Used
 
-	4.	Run the Flask server:
-      python app.py
+- **React + TypeScript**
+- **Vite**
+- **Socket.IO Client**
+- **Flask + Flask-SocketIO**
+- **Python 3**
+- **LocalStorage**
+- **Custom CSS (Glow Theme)**
+- **Clipboard API**
 
-The backend will now be running on http://127.0.0.1:5000.
 
-### 3. Frontend Setup (React)
+Feel free to reach out if you have any questions or suggestions.
 
-	1.	Navigate to the frontend/app/ folder:
-      cd ../frontend/app
-
-	2.	Install the necessary npm packages:
-      npm install
-
-	3.	Start the development server:
-      npm run dev
-
-The frontend will be running on http://localhost:5173.
-
-Usage
-
-	1.	Open your browser and navigate to http://localhost:5173.
-	2.	Enter your username and message to participate in the chat.
-	3.	Messages will be displayed in real-time with timestamps.
-
-Technologies Used
-
-	•	Frontend: React, TypeScript, CSS
-	•	Backend: Flask, Flask-SocketIO
-	•	WebSocket Communication: socket.io
-
-websocket-chat-app/
-│
-├── backend/
-│   ├── venv/
-│   ├── app.py
-│   ├── requirements.txt
-│
-├── frontend/
-│   ├── app/
-│   │   ├── public/
-│   │   ├── src/
-│   │   │   ├── assets/
-│   │   │   │   └── react.svg
-│   │   │   ├── components/
-│   │   │   │   ├── ChatBody.tsx
-│   │   │   │   ├── MessageInput.tsx
-│   │   │   ├── App.tsx
-│   │   │   ├── App.css
-│   │   │   ├── index.css
-│   │   │   ├── main.tsx
-│   │   │   ├── socket.ts
-│   │   │   ├── styles.css
-│   │   │   ├── vite-env.d.ts
-│   │   ├── .gitignore
-│   │   ├── index.html
-│   │   ├── package.json
-│   │   └── vite.config.ts
-│
-├── .gitignore 
-└── README.md 
