@@ -8,34 +8,23 @@ Supports instant messaging, custom rooms, reactions, and a polished animated UI.
 
 - **Welcome Screen**: Enter your name, choose or create a room, and instantly join the chat.
 
-
-![Welcome](gifs/welcome.gif)
-
+![Welcome](websocket-chat-app/public/assets/screenshots/welcome-screen.png)
 
 - **Real-Time Messaging**: Messages appear instantly for all users in the room through WebSockets.
 
-![Messaging](gifs/messaging.gif)
-
+![Messaging](websocket-chat-app/public/assets/screenshots/real-time-messaging.png)
 
 - **Multi-Room System**: Create unlimited rooms, switch between them, rename, or delete rooms locally.
 
-![Rooms](gifs/rooms.gif)
-
+![Rooms](websocket-chat-app/public/assets/screenshots/multi-room-system.png)
 
 - **Invite Friends**: Generate a personal invite link — users join your room automatically.
 
-![Invite](gifs/invite.gif)
-
+![Invite](websocket-chat-app/public/assets/screenshots/invite-friends.png)
 
 - **Message Reactions**: Like any message — likes update instantly for all connected users.
 
-![Likes](gifs/likes.gif)
-
-
-- **Local Persistence**: Messages and likes remain saved even after refreshing the page (per user and per room).
-
-![Persistence](gifs/persistence.gif)
-
+![Likes](websocket-chat-app/public/assets/screenshots/message-reactions.png)
 
 ## Technologies Used
 
