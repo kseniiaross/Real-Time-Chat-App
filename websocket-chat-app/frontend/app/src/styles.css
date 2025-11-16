@@ -767,4 +767,11 @@ button:active {
   button {
     width: 100%; /* Make buttons full width on mobile */
   }
+
+  .invite-btn {
+    padding: 8px 14px;       
+    font-size: 14px;         
+    width: auto !important; 
+    min-width: 120px;  
+  }
 }

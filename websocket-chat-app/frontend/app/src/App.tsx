@@ -507,7 +507,7 @@ const App: React.FC = () => {
               setIsReady(true);
             }}
           >
-            Enter Chat
+            Start Chat
           </button>
         </div>
       </div>
